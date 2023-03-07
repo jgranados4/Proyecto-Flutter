@@ -68,6 +68,25 @@ controller.add = async (req, res) => {
     }
   );
 };
+controller.AddSolic=(req,res)=>{
+  const {bloque,aula}=req.body;
+  console.log(bloque,aula);
+  const query=`INSERT INTO solicitudes(bloque,aula) VALUES(?,?)`;
+  mysqlConnection.query(query,[bloque,aula],(err,rows,fields)=>{
+    if(!err){
+      res.json({
+        error:false,
+        message:"Saved"
+      })
+    }else{
+      res.json({
+        error:true,
+        message:err,
+      })
+      console.log(err)
+    }
+  });
+}
 //* Autentificacion
 controller.auth = async (req, res, next) => {
   let { username, password } = req.body;
