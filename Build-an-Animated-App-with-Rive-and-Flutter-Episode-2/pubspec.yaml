@@ -39,6 +39,7 @@ dependencies:
   english_words: ^3.1.0
   rive: ^0.9.1
   flutter_svg: ^1.1.6
+  snippet_coder_utils: ^1.0.13
 
 dev_dependencies:
   flutter_test:

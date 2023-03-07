@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-
 import 'package:rive/rive.dart';
 
 class AnimatedBtnGenerarSolicitud extends StatelessWidget {

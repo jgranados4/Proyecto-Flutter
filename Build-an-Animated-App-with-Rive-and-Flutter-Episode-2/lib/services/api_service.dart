@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import '../config/config.dart';
 import '../model/user_model.dart';
+import '../model/Datos.dart';
 
 class APIService {
   static var client = http.Client();
@@ -30,6 +31,34 @@ class APIService {
       return userFromJson(data["datos"]);
     } else {
       return null;
+    }
+  }
+
+  static Future<bool> saveUser(
+    UserModelA model,
+  ) async {
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+    };
+    var url = Uri.http(
+      Config.apiURL,
+      Config.userAPI + "/add_solici/",
+    );
+
+    var response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: json.encode(
+        model,
+      ),
+      /*body: json.encode(
+        model.toJson(),
+      ),*/
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 

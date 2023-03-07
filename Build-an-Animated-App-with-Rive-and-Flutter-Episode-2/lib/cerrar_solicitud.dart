@@ -71,7 +71,7 @@ class _CerrarSolicitudState extends State<CerrarSolicitud> {
                         child: Column(
                           children: [
                             const Text(
-                              "Cerrar Solicitud",
+                              "Cerrar Puerta",
                               style: TextStyle(
                                   fontSize: 26, fontFamily: "Poppins"),
                             ),

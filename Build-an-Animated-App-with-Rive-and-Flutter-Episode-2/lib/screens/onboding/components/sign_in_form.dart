@@ -18,7 +18,7 @@ class SignInForm extends StatefulWidget {
 
 class _SignInFormState extends State<SignInForm> {
   UserModel? userModel;
-  static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool isShowLoading = false;
 
@@ -52,7 +52,7 @@ class _SignInFormState extends State<SignInForm> {
     return Stack(
       children: [
         Form(
-          key: formKey,
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -110,28 +110,29 @@ class _SignInFormState extends State<SignInForm> {
                     setState(() {
                       isShowLoading = true;
                     });
-                    Future.delayed(Duration(seconds: 1), () async {
-                      if (validateAndSave()) {
-                        print(userModel!.toJson());
-                        APIService.login(userModel!);
-                        check.fire();
-                        Future.delayed(Duration(seconds: 2), () {
-                          setState(() {
-                            isShowLoading = false;
+                    if (validateAndSave()) {
+                      print(userModel!.toJson());
+                      APIService.login(userModel!).then(
+                        (response) {
+                          check.fire();
+                          Future.delayed(Duration(seconds: 2), () {
+                            setState(() {
+                              isShowLoading = false;
+                            });
                           });
-                          Future.delayed(Duration(seconds: 1), () {
+                          if (response) {
                             Navigator.pushNamed(context, "/home");
-                          });
-                        });
-                      } else {
-                        error.fire();
-                        Future.delayed(Duration(seconds: 2), () {
-                          setState(() {
-                            isShowLoading = false;
-                          });
-                        });
-                      }
-                    });
+                          } else {
+                            error.fire();
+                            Future.delayed(Duration(seconds: 2), () {
+                              setState(() {
+                                isShowLoading = false;
+                              });
+                            });
+                          }
+                        },
+                      );
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFF77D8E),
@@ -174,7 +175,7 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   bool validateAndSave() {
-    final form = formKey.currentState;
+    final form = _formKey.currentState;
     if (form!.validate()) {
       form.save();
       return true;
