@@ -1,7 +1,7 @@
 # Proyecto-Flutter
 ¡Hola a todos!
 
-Tengo el placer de presentarles nuestro emocionante proyecto, una solución completa para medir y gestionar el peso de las personas, desarrollada con tecnologías de vanguardia.
+Tengo el placer de presentarles nuestro emocionante proyecto, una solución completa para medir y gestionar los cursos, desarrollada con tecnologías de vanguardia.
 
 Tecnologías Utilizadas:
 
